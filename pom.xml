@@ -1,17 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <groupId>org.maven</groupId>
-    <artifactId>AndroidAppiumDockerEmulator</artifactId>
-    <version>1.0-SNAPSHOT</version>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.maven</groupId>
+  <artifactId>AndroidAppiumDockerEmulator</artifactId>
+  <version>1.0-SNAPSHOT</version>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
-    
+  <properties>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Versions -->
+    <appium.java.client.version>9.5.0</appium.java.client.version>
+    <testng.version>7.8.0</testng.version>
+    <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
+    <suites>android</suites> <!-- renamed from ios to android if you're testing Android -->
+  </properties>
+
+  <dependencies>
+    <!-- Appium Java Client -->
+    <dependency>
+      <groupId>io.appium</groupId>
+      <artifactId>java-client</artifactId>
+      <version>${appium.java.client.version}</version>
+    </dependency>
+
+    <!-- TestNG -->
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>${testng.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <!-- Optional: Logging (you may add log4j/slf4j if needed) -->
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Compiler Plugin -->
+      <plugin>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.11.0</version>
+        <configuration>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
+        </configuration>
+      </plugin>
+
+      <!-- Surefire Plugin for TestNG -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>${maven.surefire.plugin.version}</version>
+        <configuration>
+          <suiteXmlFiles>
+            <suiteXmlFile>src/test/resources/suites/${suites}.xml</suiteXmlFile>
+          </suiteXmlFiles>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

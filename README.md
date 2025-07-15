@@ -1,16 +1,13 @@
 
 #  Android Emulator + Appium in Docker with Maven Test Execution
 
-##  Step 1: Run Docker Compose
+##  Step 1: Run Docker file
 
-Run the Docker Compose file to start the Android Emulator:
 
 ```bash
-docker-compose -f Dockercompose.yml up -d
+docker run -d -p 6080:6080  -e EMULATOR_DEVICE="Samsung Galaxy S10" -e WEB_VNC=true -v ${PWD}:/code -w /code --device /dev/kvm --name android-container budtmo/docker-android:emulator_11.0  -c "appium -a 0.0.0.0 -p 4723"
+
 ````
-
-> Make sure the file is named `Dockercompose.yml` and in your current directory.
-
 ---
 
 ## Open Android Emulator in Browser
@@ -24,16 +21,6 @@ http://localhost:6080/
 You will see the Android emulator running in the browser via VNC.
 
 ---
-
-## : Mount Code Directory
-
-In the `docker-compose.yml` file:
-
-```yaml
-    volumes:
-      - ./:/code     # Mount current host folder to /code inside the container
-    working_dir: /code  # Set /code as working directory in the container
-```
 
 This lets you code normally in your current local folder.
 

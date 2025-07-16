@@ -2,12 +2,17 @@
 import io.appium.java_client.AppiumBy;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.time.Duration;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
+import org.maven.CMDUtils;
 import org.maven.ExplicitWait;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -22,7 +27,10 @@ public class LaunchAppTest {
   private WebDriverWait wait;
 
   @BeforeClass
-  public void setUp() throws MalformedURLException {
+  public void setUp() throws IOException {
+
+
+    CMDUtils.executeCMD("node toggle_record.js");
 
     UiAutomator2Options options = new UiAutomator2Options()
         .setDeviceName("Samsung Galaxy S10")
@@ -123,7 +131,9 @@ public class LaunchAppTest {
   }
 
   @AfterClass(alwaysRun = true)
-  public void tearDown() {
+  public void tearDown() throws IOException {
       driver.quit();
+      CMDUtils.executeCMD("node toggle_record.js");
+
   }
 }

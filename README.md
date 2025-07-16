@@ -1,10 +1,10 @@
 
-# Android Emulator + Appium in Docker with Maven Test Execution
+# Android Emulator + Appium in Docker with Maven Test Execution (Only windows)
 
-## Step 1: Run Docker Container
+## Step 1: Run Docker Container use powershell and run  in curent project
 
 ```bash
-docker run -d -p 6080:6080  -e EMULATOR_DEVICE="Samsung Galaxy S10" -e WEB_VNC=true -v ${PWD}:/code -w /code --device /dev/kvm --name android-container budtmo/docker-android:emulator_11.0 "
+docker run -d -p 6080:6080  -e EMULATOR_DEVICE="Samsung Galaxy S10" -e WEB_VNC=true -v ${PWD}:/code -w /code --device /dev/kvm --name android-container budtmo/docker-android:emulator_11.0
 
 ```
 
@@ -26,9 +26,21 @@ This setup lets you work normally on your local folder (mounted inside the conta
 
 ---
 
+## Step 2: Access the Container Terminal and Start Appium
+
+Open a new terminal and run:
+
+```bash
+docker exec -it android-container /bin/bash
+```
+Then, inside the container shell, start the Appium server:
 
 
-## Step 2: Run Your Maven Test
+```bash
+appium -p 4723
+```
+
+## Step 3: Run Your Maven Test
 
 Open another terminal, access the container shell again:
 
@@ -39,14 +51,14 @@ docker exec -it android-container /bin/bash
 Run your Maven test inside the container:
 
 ```bash
-./mvnw clean test -Dtest=LaunchAppTest
+mvn clean test -Dtest=LaunchAppTest
 ```
 
 This command will run the `LaunchAppTest` class inside the emulator environment.
 
 ---
 
-## Step 3: View Test Execution
+## Step 4: View Test Execution
 
 Go back to your browser at:
 

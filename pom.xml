@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
+
   <groupId>org.maven</groupId>
   <artifactId>AndroidAppiumDockerEmulator</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <properties>
+    <!-- Java version -->
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-    <!-- Versions -->
+    <!-- Dependency versions -->
     <appium.java.client.version>9.5.0</appium.java.client.version>
     <testng.version>7.8.0</testng.version>
     <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
-    <suites>android</suites> <!-- renamed from ios to android if you're testing Android -->
+
+    <!-- Test suite -->
+    <suites>android</suites>
   </properties>
 
   <dependencies>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-exec</artifactId>
+      <version>1.3</version>
+    </dependency>
+
     <!-- Appium Java Client -->
     <dependency>
       <groupId>io.appium</groupId>
@@ -35,13 +46,11 @@
       <version>${testng.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- Optional: Logging (you may add log4j/slf4j if needed) -->
   </dependencies>
 
   <build>
     <plugins>
-      <!-- Compiler Plugin -->
+      <!-- Java Compiler -->
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
@@ -51,7 +60,7 @@
         </configuration>
       </plugin>
 
-      <!-- Surefire Plugin for TestNG -->
+      <!-- TestNG Runner -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-surefire-plugin</artifactId>
@@ -62,6 +71,10 @@
           </suiteXmlFiles>
         </configuration>
       </plugin>
+
     </plugins>
   </build>
+
+
+
 </project>

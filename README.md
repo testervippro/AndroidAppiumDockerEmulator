@@ -4,7 +4,7 @@
 ## Step 1: Run Docker Container
 
 ```bash
-docker run -d -p 6080:6080  -e EMULATOR_DEVICE="Samsung Galaxy S10" -e WEB_VNC=true -v ${PWD}:/code -w /code --device /dev/kvm --name android-container budtmo/docker-android:emulator_11.0 
+docker run -d -p 6080:6080  -e EMULATOR_DEVICE="Samsung Galaxy S10" -e WEB_VNC=true -v ${PWD}:/code -w /code --device /dev/kvm --name android-container budtmo/docker-android:emulator_11.0  sh -c "appium -p 4723"
 
 ```
 
@@ -26,23 +26,9 @@ This setup lets you work normally on your local folder (mounted inside the conta
 
 ---
 
-## Step 2: Access the Container Terminal and Start Appium
 
-Open a new terminal and run:
 
-```bash
-docker exec -it android-container /bin/bash
-```
-
-Then, inside the container shell, start the Appium server:
-
-```bash
-appium -p 4723
-```
-
----
-
-## Step 3: Run Your Maven Test
+## Step 2: Run Your Maven Test
 
 Open another terminal, access the container shell again:
 
@@ -60,7 +46,7 @@ This command will run the `LaunchAppTest` class inside the emulator environment.
 
 ---
 
-## Step 4: View Test Execution
+## Step 3: View Test Execution
 
 Go back to your browser at:
 

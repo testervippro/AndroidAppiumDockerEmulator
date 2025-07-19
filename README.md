@@ -51,7 +51,7 @@ docker exec -it android-container /bin/bash
 Run your Maven test inside the container:
 
 ```bash
-mvn clean test -Dtest=LaunchAppTest
+./mvnw clean test -Dtest=LaunchAppTest
 ```
 
 This command will run the `LaunchAppTest` class inside the emulator environment.
